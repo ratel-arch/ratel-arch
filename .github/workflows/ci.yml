@@ -25,21 +25,20 @@ jobs:
         uses: dtolnay/rust-toolchain@v1
         with:
           toolchain: stable
-          components: "sort"
       - uses: Swatinem/rust-cache@v2
       - name: ⏰ Get current date
         id: date
         run: echo "::set-output name=date::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
 
       - name: 🔨 Build
-        run: cargo build --locked --release
+        run: cargo build --locked
 
       - name: 🔎 Check formatting
         run: cargo fmt --check
       - name: 🔎 Lint
-        run: cargo clippy --workspace --all-targets --release --no-deps --frozen -- -D warnings
+        run: cargo clippy --workspace --all-targets --no-deps --frozen -- -D warnings
       - name: 🔎 Check Cargo.toml
-        run: cargo sort -g -c
+        run: cargo install cargo-sort && cargo sort -g -c
 
       - name: 🧪 Run tests
-        run: cargo test --no-fail-fast --locked --release
+        run: cargo test --no-fail-fast --locked
