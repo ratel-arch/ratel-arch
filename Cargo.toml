@@ -3,8 +3,6 @@ name = "ratel-arch"
 version = "0.1.0"
 edition = "2024"
 
-[dependencies]
-
 [profile.release]
 # Runtime performance improvements at the cost of compilation time
 # See https://nnethercote.github.io/perf-book/build-configuration.html
@@ -12,3 +10,5 @@ opt-level = 3
 lto = "fat"
 panic = "abort"
 codegen-units = 1
+
+[dependencies]
